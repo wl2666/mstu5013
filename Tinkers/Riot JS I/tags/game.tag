@@ -3,8 +3,9 @@
 		<div class="row">
 
 			<!-- SIDEBAR: START -->
-			<div id="side" class="col-3 min-vh-100">
+			<div class="col-3 min-vh-100 side { 'player-' + playerCount }">
 				<img id="titleImg" src="./assets/1200px-Secret_Hitler.png">
+				<strong><clock class="text-center"></clock></strong>
 
 				<!-- INTRO -->
 				<div show={ menuState === "intro"} class="text-center">
@@ -19,12 +20,13 @@
 					<button class="btn btn-light" onclick={ startOnline } disabled>Online</button>
 				</div>
 
+
 				<!-- PLAYER COUNT -->
 				<div show={ menuState === "playerCount" }>
 					<div class="form-group">
 						<p>How many players?</p>
 						<select class="form-control" onchange={ setNumPlayers }>
-							<option value="" disabled selected>Select Player Count</option>
+							<option value="" disabled selected>Select Number of Players</option>
 							<option value="5">5 Players</option>
 							<option value="6">6 Players</option>
 							<option value="7">7 Players</option>
@@ -93,9 +95,10 @@
 
 			<!-- MAIN CONTENT: START -->
 			<div id="main" class="col-9">
-				
+
 				<!-- REVEAL TAG -->
 				<reveal if={ menuState == "partyReveal" } players={ players }></reveal>
+
 
 			<!-- MAIN CONTENT: END -->
 			</div>
@@ -115,7 +118,7 @@
 
 		this.online = false;
 		this.players = [];
-		this.playerCount = 5;
+		this.playerCount = "";
 		this.playerTypes = { liberal: 0, fascist: 0, hitler: 0 };
 		this.playersReady = false;
 		this.readyCount = 0;
@@ -146,7 +149,6 @@
 		setNumPlayers(event) {
 			this.playerCount = Number(event.target.value);
 			this.playerTypes = getPlayerTypes(this.playerCount);
-
 			this.players = [];
 			for (let i=0; i < this.playerCount; i++) {
 				this.players.push({
@@ -241,6 +243,7 @@
 			return playerTypes;
 		}
 
+
 		/**
 		 * Shuffles array in place.
 		 * @param {Array} a items An array containing the items.
@@ -262,8 +265,26 @@
   <style>
     /* CSS */
 
-		#side {
-			background-color: #ff593f;
+		.side {
+			background-color: rgb(255, 89, 63);
+		}
+		.player-5 {
+			background-color: rgba(255, 89, 63, 0.1);
+		}
+		.player-6 {
+			background-color: rgba(255, 89, 63, 0.166);
+		}
+		.player-7 {
+			background-color: rgba(255, 89, 63, 0.332);
+		}
+		.player-8 {
+			background-color: rgba(255, 89, 63, 0.498);
+		}
+		.player-9 {
+			background-color: rgba(255, 89, 63, 0.664);
+		}
+		.player-10 {
+			background-color: rgba(255, 89, 63, 1);
 		}
 		#main {
 			background-color: #ffaa8b;
@@ -284,5 +305,7 @@
 			font-weight: bold;
 			font-size: 2em;
 		}
+
+
   </style>
 </game>

@@ -1,4 +1,6 @@
 <reveal>
+
+
   <!-- HTML -->
 	<!-- <div show={ numPlayers < 7 }>
 		<h1>Game of 5-6 Players</h1>
@@ -40,6 +42,8 @@
 	<div class="d-flex justify-content-center flex-wrap">
 		<player-card-secret each={ players } in-review={ inReview }></player-card-secret>
 	</div>
+	<something></something>
+
 
   <script>
     // JAVASCRIPT
@@ -55,6 +59,7 @@
 			this.inReview = beingReviewed;
 			this.update();
 		}
+
 
   </script>
 
