@@ -1,6 +1,7 @@
 <game-board>
   <!-- HTML -->
 	<h1>GAME-BOARD.tag</h1>
+	<something></something>
 	<div class="card">
 		<div class="card-header">
 			GAME STAGE PROGRESSION TEST
@@ -13,7 +14,7 @@
 			<h3 show={currentStage === "legislative:president"}>President draws 3, discards policy.</h3>
 			<h3 show={currentStage === "legislative:chancellor"}>Chancellor discards 1 policy.</h3>
 			<h3 show={currentStage === "executive:president"}>
-				<span show={ executivePower.power }>President { executivePower.used ? "already used" : "must use"} EXECUTIVE POWER</span>
+				<span show={ executivePower.power }>PresidMISCELLANOUSent { executivePower.used ? "already used" : "must use"} EXECUTIVE POWER</span>
 				<span show={ !executivePower.power }>No executive powers this round...</span>
 				<small show={ executivePower.power }>{ executivePower.power }</small>
 			</h3>

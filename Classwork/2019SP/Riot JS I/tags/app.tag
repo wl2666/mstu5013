@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col">
 				<h1>ORIGINAL <small>By Prof. Dayton Voorhees</small></h1>
-			  <p>There once was a man from Nantucket.</p>
+			  <p class="{first: false, second: true}">There once was a man from Nantucket.</p>
 				<p>Who kept all his cash in a bucket.</p>
 				<p>But his daughter, named Nan,</p>
 				<p>Ran away with a man.</p>
@@ -41,6 +41,16 @@
 		this.studentName = "Alpha Romeo";
 
   </script>
+
+	<style>
+	.first {
+		color: blue;
+	}
+	.second {
+		color: red;
+	}
+
+	</style>
 
   <style>
     /* CSS */

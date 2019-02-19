@@ -3,8 +3,9 @@
 		<div class="row">
 
 			<!-- SIDEBAR: START -->
-			<div id="side" class="col-3 min-vh-100">
+			<div class="col-3 min-vh-100 side { 'player-' + playerCount }">
 				<img id="titleImg" src="./assets/1200px-Secret_Hitler.png">
+				<strong><clock class="text-center"></clock></strong>
 
 				<!-- INTRO -->
 				<div show={ menuState === "intro"} class="text-center">
@@ -24,7 +25,7 @@
 					<div class="form-group">
 						<p>How many players?</p>
 						<select class="form-control" onchange={ setNumPlayers }>
-							<option value="" disabled selected>Select Player Count</option>
+							<option value="" disabled selected>Select Number of Players</option>
 							<option value="5">5 Players</option>
 							<option value="6">6 Players</option>
 							<option value="7">7 Players</option>
@@ -86,6 +87,7 @@
 				<government if={ playing }></government>
 
 				<!-- Panel for Player Stats and Actions -->
+
 				<players-panel if={ playing } players={ players }></players-panel>
 
 				<!-- Commands Available Always -->
@@ -105,7 +107,9 @@
 				<reveal if={ menuState == "partyReveal" && !playing } players={ players }></reveal>
 
 				<!-- GAME BOARDS -->
+
 				<game-board if={ playing } game-data={ gameData }></game-board>
+
 
 			<!-- MAIN CONTENT: END -->
 			</div>
@@ -126,7 +130,7 @@
 		this.playing = false;
 		this.online = false;
 		this.players = [];
-		this.playerCount = 5;
+		this.playerCount = "";
 		this.playerTypes = { liberal: 0, fascist: 0, hitler: 0 };
 		this.playersReady = false;
 		this.readyCount = 0;
@@ -285,29 +289,48 @@
 		DEVELOPER PUSH --- Code to push state of game to where I want to test.
 		Comment OUT to start from beginning
 		********************/
-		(function() {
-			console.log('game.tag', this);
+		// (function() {
+		// 	console.log('game.tag', this);
+		//
+		// 	let playerCount = 10;
+		// 	this.playerTypes = getPlayerTypes(playerCount);
+		// 	this.players = createPlayers(playerCount);
+		//
+		// 	const autoNames = ["Aardvark","Bronco","Chipmunk","Dragon","Elephant","Fox","Giraffe","Horse","Iguana","Jackal"];
+		// 	for (let i=0; i < this.players.length; i++) {
+		// 		this.players[i].name = autoNames[i];
+		// 	}
+		// 	this.playersReady = true;
+		// 	this.assignPlayerRoles();
+		// 	this.playGame();
+		// }.bind(this))();
 
-			let playerCount = 10;
-			this.playerTypes = getPlayerTypes(playerCount);
-			this.players = createPlayers(playerCount);
-
-			const autoNames = ["Aardvark","Bronco","Chipmunk","Dragon","Elephant","Fox","Giraffe","Horse","Iguana","Jackal"];
-			for (let i=0; i < this.players.length; i++) {
-				this.players[i].name = autoNames[i];
-			}
-			this.playersReady = true;
-			this.assignPlayerRoles();
-			this.playGame();
-		}.bind(this))();
 
   </script>
 
   <style>
     /* CSS */
 
-		#side {
+		.side {
 			background-color: #ff593f;
+		}
+		.player-5 {
+			background-color: rgba(255, 89, 63, 0.1);
+		}
+		.player-6 {
+			background-color: rgba(255, 89, 63, 0.166);
+		}
+		.player-7 {
+			background-color: rgba(255, 89, 63, 0.332);
+		}
+		.player-8 {
+			background-color: rgba(255, 89, 63, 0.498);
+		}
+		.player-9 {
+			background-color: rgba(255, 89, 63, 0.664);
+		}
+		.player-10 {
+			background-color: rgba(255, 89, 63, 1);
 		}
 		#main {
 			background-color: #ffaa8b;
