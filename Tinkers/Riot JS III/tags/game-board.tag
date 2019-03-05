@@ -268,7 +268,7 @@
 		observer.on('government:chaos', () => {
 			let policy = this.policyDrawDeck.splice(0, 1)[0];
 			if (policy === "fascist") {
-				// What now?
+				// observer.on('failedElection:3', discard());// What now?
 			} else {
 				// What now?
 			}

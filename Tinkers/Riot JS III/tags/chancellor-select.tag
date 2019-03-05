@@ -9,7 +9,7 @@
   <script>
     // JAVASCRIPT
     let tag = this;
-
+		console.log(tag);
 		this.players = opts.players;
 		this.candidates = getCandidates(this.players);
 

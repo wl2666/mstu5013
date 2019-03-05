@@ -147,6 +147,7 @@
 				if (this.failCount < 3) { // Society okay...
 					this.nominatePresident(this.nomineePres);
 				} else { // Societal upheaval!!!
+					observer.trigger('failedElection:3')
 					alert('ELECTION FAILED > THREE TIMES!');
 
 					/********************
