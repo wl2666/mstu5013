@@ -30,8 +30,8 @@
     };
       firebase.initializeApp(config);
       let database = firebase.firestore();
-
       let todoItems = [];
+      
       database.collection('TODOLISTS').get().then(snapshot => {
         snapshot.forEach(doc => {
           let docData = doc.data();

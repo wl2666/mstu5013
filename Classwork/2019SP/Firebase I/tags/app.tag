@@ -6,7 +6,7 @@
 		<li each={ todo in items.filter(whatShow) }>
 			<label class={ completed: todo.done }>
 				<input type="checkbox" checked={ todo.done } onclick={ parent.toggle }>
-				{ todo.name }
+				{ todo.title }
 			</label>
 		</li>
 	</ul>
@@ -32,7 +32,7 @@
 			if (this.text) {
 
 				// Simple write of document to collection
-				database.collection('todos').add({
+				database.collection('TODOLISTS').add({
 					title: this.text,
 					done: false
 				});
