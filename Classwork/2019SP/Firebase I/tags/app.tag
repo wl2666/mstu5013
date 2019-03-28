@@ -6,7 +6,7 @@
 		<li each={ todo in items.filter(whatShow) }>
 			<label class={ completed: todo.done }>
 				<input type="checkbox" checked={ todo.done } onclick={ parent.toggle }>
-				{ todo.title }
+				{ todo.name }
 			</label>
 		</li>
 	</ul>
@@ -30,7 +30,11 @@
 
 		add(event) {
 			if (this.text) {
-				this.items.push({title: this.text});
+				database.collection('TODOLISTS').add({
+					name: this.text,
+					done: false
+				});
+				this.items.push({name: this.text});
 				this.text = this.refs.input.value = '';
 			}
 			event.preventDefault();

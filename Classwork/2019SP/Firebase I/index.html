@@ -15,30 +15,38 @@
 
     <!-- LOAD Riot, Firebase -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/riot/3.13.2/riot+compiler.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
 
     <script>
-      // INITIALIZE FIREBASE
-	    var config = {
-	      apiKey: "YOUR API KEY",
-	      authDomain: "YOUR PROJECT ID.firebaseapp.com",
-	      databaseURL: "https://YOUR PROJECT ID.firebaseio.com",
-	      projectId: "YOUR PROJECT ID",
-	      storageBucket: "YOUR PROJECT ID.appspot.com",
-	      messagingSenderId: "YOUR MESSAGINGSENDER ID"
-	    };
-      firebase.initializeApp(config);
 
-      // INITIALIZE RIOT
-			riot.mount('app', {
-	      title: 'I want to behave!',
-	      items: [
-	        { title: 'Avoid excessive caffeine', done: true },
-	        { title: 'Hidden item',  hidden: true },
-	        { title: 'Be less provocative'  },
-	        { title: 'Be nice to people' }
-	      ]
-	    })
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyA9R-fTsiJdlFVfwfou8ZqQAgjftwODG08",
+      authDomain: "mstu5013test.firebaseapp.com",
+      databaseURL: "https://mstu5013test.firebaseio.com",
+      projectId: "mstu5013test",
+      storageBucket: "mstu5013test.appspot.com",
+      messagingSenderId: "224139921749"
+    };
+      firebase.initializeApp(config);
+      let database = firebase.firestore();
+
+      let todoItems = [];
+      database.collection('TODOLISTS').get().then(snapshot => {
+        snapshot.forEach(doc => {
+          let docData = doc.data();
+          todoItems.push(docData);
+        });
+        console.log(todoItems);
+
+        // INITIALIZE RIOT
+  			riot.mount('app', {
+  	      title: 'I want to behave!',
+  	      items: todoItems
+  	    });
+      })
+
+      // console.log('end of html');
     </script>
 
   </body>
