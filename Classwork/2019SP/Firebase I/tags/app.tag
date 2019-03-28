@@ -30,11 +30,14 @@
 
 		add(event) {
 			if (this.text) {
-				database.collection('TODOLISTS').add({
-					name: this.text,
+
+				// Simple write of document to collection
+				database.collection('todos').add({
+					title: this.text,
 					done: false
 				});
-				this.items.push({name: this.text});
+
+				this.items.push({title: this.text});
 				this.text = this.refs.input.value = '';
 			}
 			event.preventDefault();
