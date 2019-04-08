@@ -21,17 +21,17 @@
 		<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
 
     <script>
-      // INITIALIZE FIREBASE
-	    var config = {
-	      apiKey: "YOUR API KEY",
-	      authDomain: "YOUR PROJECT ID.firebaseapp.com",
-	      databaseURL: "https://YOUR PROJECT ID.firebaseio.com",
-	      projectId: "YOUR PROJECT ID",
-	      storageBucket: "YOUR PROJECT ID.appspot.com",
-	      messagingSenderId: "YOUR MESSAGINGSENDER ID"
-	    };
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCyeP7RJps8D5EWtAOqr6Ypt-8tFfdUgjQ",
+      authDomain: "tinker-firestore-one.firebaseapp.com",
+      databaseURL: "https://tinker-firestore-one.firebaseio.com",
+      projectId: "tinker-firestore-one",
+      storageBucket: "tinker-firestore-one.appspot.com",
+      messagingSenderId: "866533293907"
+    };
+    firebase.initializeApp(config);
 
-      firebase.initializeApp(config);
 
 			// Create firestore object (database ref)
 			let database = firebase.firestore();

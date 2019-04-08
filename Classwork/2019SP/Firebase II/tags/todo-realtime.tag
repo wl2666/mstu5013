@@ -18,6 +18,7 @@
 		<button type="button" disabled={ items.filter(onlyDone).length == 0 } onclick={ removeAllDone }>
 			X{ items.filter(onlyDone).length }
 		</button>
+		<button type="button" onclick={ nextPage }>NEXT PAGE</button>
 	</form>
 
 	<!-- this script tag is optional -->
@@ -41,7 +42,8 @@
 				collectionRef.doc(id).set({
 					title: this.text,
 					done: false,
-					id: id
+					id: id,
+					timestamp: firebase.firestore.FieldValue.serverTimestamp()
 				});
 
 				this.text = this.refs.input.value = '';
@@ -64,6 +66,15 @@
 			return true;
 		}
 
+		nextPage() {
+			database.collection('todos-live').orderBy('timestamp', 'asc')
+			.startAfter(this.lastTimestamp).limit(5).onSnapshot(snapshot => {
+				this.items = snapshot.docs.map(doc => doc.data());
+				this.lastTimestamp = this.items[this.items.length - 1].timestamp;
+				this.update();
+			});
+		}
+
 		// FILTER FUNCTIONS ----------------------------------------
 
 		whatShow(item) {
@@ -80,7 +91,7 @@
 
 		this.on('mount', () => {
 			// DATABASE READ LIVE
-			stopListening = database.collection('todos-live').onSnapshot(snapshot => {
+			stopListening = database.collection('todos-live').orderBy('timestamp', 'asc').limit(5).onSnapshot(snapshot => {
 				this.items = snapshot.docs.map(doc => doc.data());
 				this.update();
 			});
