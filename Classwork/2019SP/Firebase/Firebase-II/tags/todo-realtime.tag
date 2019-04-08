@@ -1,6 +1,6 @@
-<todo-basic>
+<todo-realtime>
 
-	<h3>{ title } &mdash; Basic</h3>
+	<h3>{ title } &mdash; Realtime</h3>
 
 	<ul>
 		<li each={ todo in items.filter(whatShow) }>
@@ -18,6 +18,7 @@
 		<button type="button" disabled={ items.filter(onlyDone).length == 0 } onclick={ removeAllDone }>
 			X{ items.filter(onlyDone).length }
 		</button>
+		<button type="button" onclick={ nextPage }>NEXT PAGE</button>
 	</form>
 
 	<!-- this script tag is optional -->
@@ -32,53 +33,49 @@
 		add(event) {
 			if (this.text) {
 
-				let todo = {
-					title: this.text,
-					done: false,
-					timestamp: firebase.firestore.FieldValue.serverTimestamp()
-				};
+				// DATABASE WRITE - Preparation
+				let collectionRef = database.collection('todos-live');
+				let docRef = collectionRef.doc();
+				let id = docRef.id;
 
 				// DATABASE WRITE
-				database.collection('todos').add(todo).then(doc => {
-					console.log('Document successfully created!');
-
-					todo.id = doc.id;
-					this.items.push(todo);
-
-					this.update();
+				collectionRef.doc(id).set({
+					title: this.text,
+					done: false,
+					id: id,
+					timestamp: firebase.firestore.FieldValue.serverTimestamp()
 				});
 
 				this.text = this.refs.input.value = '';
 			}
-
 			event.preventDefault();
 		}
 
 		removeAllDone(event) {
-			let doneTodos = this.items.filter(item => item.done);
+			let doneItems = this.items.filter(todo => todo.done);
 
-			let todosRef = database.collection('todos');
-
-			for (todo of doneTodos) {
-
+			for (doneTodo of doneItems) {
 				// DATABASE DELETE
-				todosRef.doc(todo.id).delete().then( () => {
-					console.log('Document successfully deleted!');
-				});
+				database.collection('todos-live').doc(doneTodo.id).delete();
 			}
-
-			this.items = this.items.filter(item => !item.done);
 		}
 
 		toggle(event) {
 			let item = event.item.todo;
 			item.done = !item.done;
-
-			database.collection('todos').doc(item.id).update({
+			database.collection('todos-live').doc(item.id).update({
 				done: item.done
 			});
-
 			return true;
+		}
+
+		nextPage() {
+			database.collection('todos-live').orderBy('timestamp', 'asc')
+			.startAfter(this.lastTimestamp).limit(5).onSnapshot(snapshot => {
+				this.items = snapshot.docs.map(doc => doc.data());
+				this.lastTimestamp = this.items[this.items.length - 1].timestamp;
+				this.update();
+			});
 		}
 
 		// FILTER FUNCTIONS ----------------------------------------
@@ -93,27 +90,19 @@
 
 		// LIFECYCLE EVENTS ---------------------------------------
 
+		let stopListening;
+
 		this.on('mount', () => {
-
-			// DATABASE READ
-			// .orderBy(prop, 'asc/desc')
-			// .where('prop', '< <= == > >= array_contains', 'value')
-			// .limit(number)
-			// How would you get all words like camel, camera, camp?
-			database.collection('todos').orderBy('timestamp', 'desc').limit(5).get().then(snapshot => {
-				console.log('Collection successfully fetched.');
-
-				this.items = [];
-
-				snapshot.forEach(doc => {
-					let todo = doc.data();
-							todo.id = doc.id;
-					this.items.push(todo);
-				});
-
+			// DATABASE READ LIVE
+			stopListening = database.collection('todos-live').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
+				this.items = snapshot.docs.map(doc => doc.data());
 				this.update();
 			});
 		});
+
+		this.on('unmount', () => {
+			stopListening();
+		});
 	</script>
 
-</todo-basic>
+</todo-realtime>
