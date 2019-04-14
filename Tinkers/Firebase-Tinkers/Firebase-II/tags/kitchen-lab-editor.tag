@@ -13,7 +13,7 @@
 			let keywords = this.refs.labKeywords.value;
 					keywords = keywords.split(',');
 					keywords = keywords.map(phrase => {
-						return phrase.toLowerCase().replace(/[^a-zA-Z0-9]/g, '').replace(/\s/g, '');
+					return phrase.toLowerCase().replace(/[^a-zA-Z0-9]/g, '').replace(/\s/g, '');
 					});
 
 			let lab = {

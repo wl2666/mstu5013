@@ -19,26 +19,18 @@
 
     <!-- LOAD JQuery, Bootstrap, Riot, Firebase -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/riot/3.13.2/riot+compiler.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
 
     <script>
-      // INITIALIZE FIREBASE
-			var config = {
-				apiKey: "AIzaSyBEbOWvV5Fig3eNvWVWValUExl-_WBBxEo",
-				authDomain: "mstu5013.firebaseapp.com",
-				databaseURL: "https://mstu5013.firebaseio.com",
-				projectId: "mstu5013",
-				storageBucket: "mstu5013.appspot.com",
-				messagingSenderId: "953045445181"
-			};
-	    // var config = {
-	    //   apiKey: "YOUR API KEY",
-	    //   authDomain: "YOUR PROJECT ID.firebaseapp.com",
-	    //   databaseURL: "https://YOUR PROJECT ID.firebaseio.com",
-	    //   projectId: "YOUR PROJECT ID",
-	    //   storageBucket: "YOUR PROJECT ID.appspot.com",
-	    //   messagingSenderId: "YOUR MESSAGINGSENDER ID"
-	    // };
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAgwFicjHrSGBo69GHmb5aEdN7LQ4BrBzM",
+        authDomain: "tinker-firestore-two.firebaseapp.com",
+        databaseURL: "https://tinker-firestore-two.firebaseio.com",
+        projectId: "tinker-firestore-two",
+        storageBucket: "tinker-firestore-two.appspot.com",
+        messagingSenderId: "756006427943"
+      };
       firebase.initializeApp(config);
 			let database = firebase.firestore();
 
