@@ -8,6 +8,7 @@
 		this.roomUser = opts.roomUser;
 		this.cue = false;
 
+
 		toggleNote(event) {
 			if (this.isUser) {
 				let roomUserDoc = database.collection('sound-rooms/' + this.room.id + '/users').doc(this.roomUser.id);
@@ -17,7 +18,7 @@
 		}
 		observer.on('onBeat', beatIndex => {
 			console.log('x')
-			if (this.i === beatIndex) {
+			if (this.i === beatIndex && this.roomUser.notes[this.i].play === true) {
 				this.cue = true;
 			} else {
 				this.cue = false;

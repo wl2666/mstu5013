@@ -15,7 +15,7 @@
 					<p>
 						...are in the room.
 					</p>
-					<metronome></metronome>
+					<metronome user={ user } room={ room }></metronome>
 				</div>
   		</div>
   	</div>
@@ -90,7 +90,7 @@
 						this.roomUsers.push(doc.data());
 					});
 
-					console.log(this.roomUsers);
+					// console.log(this.roomUsers);
 
 					this.update();
 				});
